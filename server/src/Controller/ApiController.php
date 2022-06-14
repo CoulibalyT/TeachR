@@ -8,13 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
 {
-    /**
-     * @Route("/{reactRouting}", name="home", defaults={"reactRouting": null})
-     */
-    public function index()
-    {
-        return $this->render('api/index.html.twig');
-    }
+
       /**
      * @Route("/api/users", name="users")
      * @return \Symfony\Component\HttpFoundation\JsonResponse
