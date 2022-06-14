@@ -25,18 +25,31 @@ const styles = StyleSheet.create({
   },
 
   containerFlex:{
-    marginTop: '20%',
+
     flexDirection: 'row',
     alignItems:'center',
-    justifyContent: 'center'
+   
+  },
+
+  blockMargin:{
+    marginTop:'15%',
+    marginLeft:'10%',
+    marginRight:'10%',
+    marginBottom:'15%',
   },
 
   img:{
     borderRadius:50/2,
+    marginRight:'10%',
     width:50,
     height: 50,
-    alignSelf: 'center',
-    marginLeft: '10%' 
+    // alignSelf: 'center',
+
+  },
+
+  titre:{
+    marginTop: '8%',
+    color: "blue",
   },
   // dotContainer: {
   //   backgroundColor: 'rgb(200,0,0)',
