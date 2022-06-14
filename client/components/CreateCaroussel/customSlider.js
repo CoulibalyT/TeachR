@@ -8,13 +8,13 @@ import CarouselItem from './carouselItem';
 const { width } = Dimensions.get('window');
 export default function CustomSlider({ data }) {
   const carouselRef = useRef(null);
-  const [slideIndex, setSlideIndex] = useState(0);
+  // const [slideIndex, setSlideIndex] = useState(0);
 
   const settings = {
-    onSnapToItem: (index) => setSlideIndex(index),
+    // onSnapToItem: (index) => setSlideIndex(index),
     sliderWidth: width,
     sliderHeight: width,
-    itemWidth: width - 80,
+    itemWidth: width - 70,
     data: data,
     renderItem: CarouselItem,
     hasParallaxImages: true,
