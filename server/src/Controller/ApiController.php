@@ -2,62 +2,66 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Teachers;
+use App\Repository\TeachersRepository;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 class ApiController extends AbstractController
 {
 
       /**
-     * @Route("/api/users", name="users")
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @Route("/api/users", name="users", methods={"GET"})
      */
-    public function getUsers()
+    public function getUsers(TeachersRepository $teachersRepository, SerializerInterface $serializer)
     {
-        $users = [
-            [
-                'id' => 1,
-                'name' => 'Olususi Oluyemi',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-                'imageURL' => 'https://randomuser.me/api/portraits/women/50.jpg'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Camila Terry',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-                'imageURL' => 'https://randomuser.me/api/portraits/men/42.jpg'
-            ],
-            [
-                'id' => 3,
-                'name' => 'Joel Williamson',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-                'imageURL' => 'https://randomuser.me/api/portraits/women/67.jpg'
-            ],
-            [
-                'id' => 4,
-                'name' => 'Deann Payne',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-                'imageURL' => 'https://randomuser.me/api/portraits/women/50.jpg'
-            ],
-            [
-                'id' => 5,
-                'name' => 'Donald Perkins',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
-                'imageURL' => 'https://randomuser.me/api/portraits/men/89.jpg'
-            ]
-        ];
-    
+
+        $Teachr = $teachersRepository->findAll();
+
+        $postSerialise = $serializer->serialize($Teachr, 'json');
+
+  
         $response = new Response();
 
-        
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');
         
-        $response->setContent(json_encode($users));
+        $response->setContent(json_encode($postSerialise));
         
         // var_dump($response);
         return $response;
     }
+
+          /**
+     * @Route("/api/users", name="users_create", methods={"POST"})
+     */
+
+     public function SendUsers(Request $request, SerializerInterface $serializer, EntityManagerInterface $em ){
+        try{
+
+            $json = $request->getContent();
+            $post = $serializer->deserialize($json, Teachers::class,'json');
+            $post->setDate(new \DateTime());
+            $em->persist($post);
+            $em->flush();
+            // return $this->json($post, 201, []);
+
+        } catch(NotEncodableValueException $e){
+            return $this->json([
+                'status' => 400,
+                'message' => $e->getMessage()
+            ], 400);
+        }
+
+     }
 
 }

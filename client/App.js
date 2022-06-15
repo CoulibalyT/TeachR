@@ -2,47 +2,43 @@ import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Body from './components/body';
+import Body from './components/PageNav';
 import CustomSlider from './components/CreateCaroussel/customSlider';
 import data from './components/CreateCaroussel/data';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import PageNav from './components/PageNav';
+import PageConnect from './components/PageConnect';
 
 // import Header from './components/header';
 
+const Stack = createNativeStackNavigator();
 
 
 export default function App() {
-
-
-  // useEffect(()=> {
-  //   axios({
-  //     method: "get",
-  //     url: 'http://127.0.0.1:8000/api/users',
-  //   })
-  //     .then(function (response) {
-  //       console.log(JSON.stringify(response.data));
-  //     })
-
-  //     .catch(function (error) {
-  //       console.log(error.response, "error2");
-  //     });
-
-  // },[])
+ 
 
   return (
-    <View style={styles.container}>
-      {/* <Header /> */}
-      <CustomSlider data={data} />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+    <Stack.Navigator>
+    <Stack.Screen name="Teach'rs" component={PageNav} options={{headerBackVisible:true}} />
+      <Stack.Screen name="Accueil" component={CustomSlider} options={{headerBackVisible:true}} />
+      <Stack.Screen name="Connection" component={PageConnect} options={{headerBackVisible:true}} />
+    </Stack.Navigator>
+  </NavigationContainer>
+    // <View style={styles.container}>
+    //   {/* <Header /> */}
+     
+    //   <StatusBar style="auto" />
+    // </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });

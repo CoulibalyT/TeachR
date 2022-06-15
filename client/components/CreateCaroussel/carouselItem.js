@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-native-cards";
 import { ParallaxImage } from "react-native-snap-carousel";
-import { View, Text, Pressable, SafeAreaView, Image } from "react-native";
+import { View, Text, Pressable, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import styles from "../../styles/carousel";
 
 function CarouselItem({ item, index }, parallaxProps) {
@@ -18,20 +18,12 @@ function CarouselItem({ item, index }, parallaxProps) {
            <Text>{item.title}</Text> 
           <Text style={styles.titre}>Description</Text>
         <Text>{item.description}</Text>
+        <TouchableOpacity style={styles.button}><Text style={styles.textButton}>Prendre un cours avec ce Teach'R</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.button2}><Text style={styles.textButton2}>Retirer ce Teach'R de mes favoris</Text></TouchableOpacity>
         </View>
       </Card>
-      {/* <ParallaxImage
-          
-          // containerStyle={styles.imageContainer}
-          // style={styles.image}
-          {...parallaxProps}
-        /> */}
-      {/* <Text style={styles.title} numberOfLines={2}>
-          {item.title}
-        </Text> */}
     </SafeAreaView>
     // </Pressable>
   );
 }
-
 export default CarouselItem;

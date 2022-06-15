@@ -3,10 +3,14 @@ import { View, Text, Dimensions, Button } from 'react-native';
 import styles from '../../styles/carousel';
 import Carousel from 'react-native-snap-carousel';
 import CarouselItem from './carouselItem';
+import data from './data';
+
 // import CustomPaging from './customPagin';
 
 const { width } = Dimensions.get('window');
-export default function CustomSlider({ data }) {
+export default function CustomSlider() {
+  
+  
   const carouselRef = useRef(null);
   // const [slideIndex, setSlideIndex] = useState(0);
 
