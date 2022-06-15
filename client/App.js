@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PageNav from './components/PageNav';
 import PageConnect from './components/PageConnect';
+import List from './components/List';
 
 // import Header from './components/header';
 
@@ -24,6 +25,7 @@ export default function App() {
     <Stack.Screen name="Teach'rs" component={PageNav} options={{headerBackVisible:true}} />
       <Stack.Screen name="Accueil" component={CustomSlider} options={{headerBackVisible:true}} />
       <Stack.Screen name="Connection" component={PageConnect} options={{headerBackVisible:true}} />
+      <Stack.Screen name="List" component={List} options={{headerBackVisible:true}} />
     </Stack.Navigator>
   </NavigationContainer>
     // <View style={styles.container}>

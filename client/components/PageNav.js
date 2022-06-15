@@ -9,30 +9,13 @@ import axios from 'axios';
 
 
 export default function PageNav({navigation}) {
-
- useEffect(()=> {
-    axios({
-      method: "get",
-      url: 'http://10.41.177.18:8000/api/users',
-    })
-      .then(function (response) {
-        console.log(response.data);
-      })
-
-      .catch(function (error) {
-        console.log(error.response);
-      });
-
-  },[])
-
-
-
   return (
     <SafeAreaView>
       {/* <Card style={styles.card}> */}
       <View style={{alignItems:'center'}}>
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Accueil')}><Text style={styles.textButton}>Voir mes Teach'rs favoris</Text></TouchableOpacity>
-    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Connection')}><Text style={styles.textButton}>Ajouter un Teach'r</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Connection')}><Text style={styles.textButton}>Ajouter un Teach'rs</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('List')}><Text style={styles.textButton}>Liste des Teach'rs</Text></TouchableOpacity>
       </View>
     {/* <TouchableOpacity style={styles.button2}><Text style={styles.textButton2}>Retirer ce Teach'R de mes favoris</Text></TouchableOpacity> */}
       {/* </Card> */}

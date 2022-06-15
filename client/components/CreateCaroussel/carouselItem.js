@@ -4,7 +4,7 @@ import { ParallaxImage } from "react-native-snap-carousel";
 import { View, Text, Pressable, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import styles from "../../styles/carousel";
 
-function CarouselItem({ item, index }, parallaxProps) {
+function CarouselItem({ item }) {
   return (
     // <Pressable onPress={() => alert('Image description:' + item.description)}>
     <SafeAreaView style={styles.item}>
