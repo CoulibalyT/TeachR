@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Platform } from "react-native";
+import { Dimensions, StyleSheet} from "react-native";
 // import {ViewPropTypes} from 'deprecated-react-native-prop-types';
 const { width: screenWidth } = Dimensions.get("window");
 const styles = StyleSheet.create({

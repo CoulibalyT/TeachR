@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "react-native-cards";
-import { ParallaxImage } from "react-native-snap-carousel";
 import { View, Text, Pressable, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import styles from "../../styles/carousel";
 

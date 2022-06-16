@@ -1,21 +1,17 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, Dimensions, Button } from 'react-native';
-import styles from '../../styles/carousel';
-import Carousel from 'react-native-snap-carousel';
-import CarouselItem from './carouselItem';
-import data from './data';
+import React, { useRef} from "react";
+import { View,Dimensions} from "react-native";
+import styles from "../../styles/carousel";
+import Carousel from "react-native-snap-carousel";
+import CarouselItem from "./carouselItem";
+import data from "./data";
 
 // import CustomPaging from './customPagin';
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 export default function CustomSlider() {
-  
-  
   const carouselRef = useRef(null);
-  // const [slideIndex, setSlideIndex] = useState(0);
 
   const settings = {
-    // onSnapToItem: (index) => setSlideIndex(index),
     sliderWidth: width,
     sliderHeight: width,
     itemWidth: width - 70,
@@ -25,19 +21,7 @@ export default function CustomSlider() {
   };
   return (
     <View style={styles.container}>
-      <Carousel
-        ref={carouselRef}
-        {...settings}
-      />
-      {/* <CustomPaging data={data} activeSlide={slideIndex} /> */}
-      {/* <Button
-        onPress={() => carouselRef.current.snapToItem(0)}
-        title="Go to start"
-      />
-      <Button
-        onPress={() => carouselRef.current.snapToItem(data.length - 1)}
-        title="Go to end"
-      /> */}
+      <Carousel ref={carouselRef} {...settings} />
     </View>
   );
 }

@@ -19,7 +19,7 @@ class Profil
     #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
-    #[ORM\OneToOne(targetEntity: Teachrs::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Teachrs::class, cascade: ['persist', 'remove'],fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private $teachrs;
 
