@@ -7,7 +7,8 @@ import {
 } from "react-native";
 import React from "react";
 
-// import Carousel from 'react-native-snap-carousel'
+
+// Cette fonction met en page les differents button de l'appli
 
 export default function PageNav({ navigation }) {
   return (
@@ -27,7 +28,7 @@ export default function PageNav({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Liste des Teachrs",)}
+          onPress={() => navigation.navigate("Liste des Teachrs")}
         >
           <Text style={styles.textButton}>Liste des Teachrs</Text>
         </TouchableOpacity>

@@ -9,16 +9,22 @@ import {
 import React, { useState } from "react";
 import axios from "axios";
 
+//Cette fonction vas permettre à un Teachr de s'inscrire sur l'Appli, en cas de succès les données seront envoyer dans la base de donnée.
+
 export default function PageConnect({ navigation }) {
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [teachr, setTeachr] = useState("");
 
   var data = {
-    name: email,
+    teachrs: {
+      name: name,
+    },
   };
 
   const submit = () => {
     axios({
       method: "post",
+       //CHANGER L'ADRESSE IPV4 PAR LA VOTRE
       url: "http://10.41.177.18:8000/api/users",
       data: data,
       headers: {
@@ -26,8 +32,8 @@ export default function PageConnect({ navigation }) {
         "Content-Type": "application/json",
       },
     })
-      .then(function (response) {
-        console.log(response);
+      .then(async function (response) {
+        setTeachr(response.data);
         navigation.navigate("Teach'rs");
       })
       .catch(function (error) {
@@ -38,16 +44,12 @@ export default function PageConnect({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.Text}>Ajouter un nouveau Teach'R</Text>
       <TextInput
-        value={email}
-        onChangeText={setEmail}
+        onChangeText={setName}
         placeholder={"Prenom"}
         style={styles.input}
       />
       <Button title={"Ajoutez Teachrs"} style={styles.input} onPress={submit} />
-      <TouchableOpacity
-        style={styles.button}
-        // onPress={() => navigation.navigate('register')}
-      ></TouchableOpacity>
+      <TouchableOpacity style={styles.button}></TouchableOpacity>
     </View>
   );
 }

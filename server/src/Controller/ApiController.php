@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Profil;
 use App\Entity\Statistics;
-use App\Entity\Teachrs;
 use App\Repository\ProfilRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,13 +14,12 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 class ApiController extends AbstractController
 {
-
-
+    
     ////////////////////////////////////////////////////////METHODE GET POUR RECUPERER LES DONNÉES DES TEACHERS///////////////////////////////////////////////////////////
     /**
      * @Route("/api/users", name="users", methods={"GET"})
      */
-    public function getUsers(ProfilRepository $profilRepository, SerializerInterface $serializer)
+    public function getUsers(ProfilRepository $profilRepository)
     {
         // $Teachr = $teachrsRepository->findAll();
         // $postSerialise = $serializer->serialize($Teachr, 'json');
@@ -32,8 +30,6 @@ class ApiController extends AbstractController
         return $this->json($profilRepository->findAll(), 200);
     }
 
-
-
     ////////////////////////////////////////////////////////METHODE POST POUR ENVOYER LES DONNÉES DES TEACHERS///////////////////////////////////////////////////////////
     /**
      * @Route("/api/users", name="users_create", methods={"POST"})
@@ -43,13 +39,14 @@ class ApiController extends AbstractController
     {
         $json = $request->getContent();
         try {
-            $data = $serializer->deserialize($json, Teachrs::class, 'json');
-            $data->setCreatedAt(new \DateTimeImmutable);
-            // $stat = new Statistics();
-            // $stat->setStats(1);
+            $data = $serializer->deserialize($json, Profil::class, 'json');
+            $data->getTeachrs()->setCreatedAt(new \DateTimeImmutable);
             $em->persist($data);
+            $new = $em->getRepository(Statistics::class)->find(1);
+            $increments = $new->getStats() + 1;
+            $new->setStats($increments);
+            $em->persist($new);
             $em->flush();
-
             return $this->json($data, 201);
         } catch (NotEncodableValueException $e) {
             return $this->json([
@@ -63,7 +60,7 @@ class ApiController extends AbstractController
     /**
      * @Route("/api/users/{id}", name="users_update", methods={"PUT"})
      */
-    public function UpdateUsers(int $id, Request $request,SerializerInterface $serializer, EntityManagerInterface $em)
+    public function UpdateUsers(int $id, Request $request, SerializerInterface $serializer, EntityManagerInterface $em)
     {
 
         $json = $request->getContent();
@@ -72,8 +69,10 @@ class ApiController extends AbstractController
             $data = $serializer->deserialize($json, Profil::class, 'json');
             $formation = $data->getFormation();
             $description = $data->getDescription();
+            $name = $data->getTeachrs()->getName();
             $new->setFormation($formation);
             $new->setDescription($description);
+            $new->getTeachrs()->setName($name);
             $em->persist($new);
             $em->flush();
             return $this->json($new, 201);

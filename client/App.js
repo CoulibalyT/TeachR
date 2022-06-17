@@ -6,9 +6,7 @@ import PageConnect from "./components/PageConnect";
 import List from "./components/List";
 import PageUpdate from "./components/PageUpdate";
 
-
-
-// import Header from './components/header';
+// Cette fonction gerera la Naviagtion entre mes pages 
 
 const Stack = createNativeStackNavigator();
 

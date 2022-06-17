@@ -1,26 +1,23 @@
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import axios from "axios";
 import styles from "../styles/carousel";
 import React, { useEffect, useState } from "react";
 
+// Cette fonction vas recuperer toutes les données de l'api pour pouvoir listé tout les teachrs 
+
 export default function List({ navigation }) {
-  const [teachers, setTeachers] = useState([]);
-// 10.41.177.18
+  const [teachr, setTeachr] = useState([]);
+
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://192.168.1.14:8000/api/users",
+      //CHANGER L'ADRESSE IPV4 PAR LA VOTRE
+      url: "http://10.41.177.18:8000/api/users",
     })
       .then(function (response) {
         console.log(response.data);
-        setTeachers(response.data);
+        setTeachr(response.data);
       })
-
       .catch(function (error) {
         console.log(error.response);
       });
@@ -28,12 +25,12 @@ export default function List({ navigation }) {
 
   return (
     <ScrollView>
-      {teachers.map((teachr) => {
+      {teachr.map((teachr,key) => {
         return (
           <View style={styles.blockMargin}>
             <View style={styles.containerFlex}>
               <View>
-              <Text>{teachr.teachrs.name}</Text>
+                <Text>{teachr.teachrs.name}</Text>
               </View>
             </View>
             <Text style={styles.titre}>Formation</Text>
@@ -47,10 +44,17 @@ export default function List({ navigation }) {
             >
               <Text style={styles.textButton}>Ajouter dans mes favoris</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button2} onPress={()=> navigation.navigate("Modifier un profil", {teachr})}>
-              <Text style={styles.textButton2} >Modifier ses informations</Text>
+            <TouchableOpacity
+              style={styles.button2}
+              onPress={() =>
+                navigation.navigate("Modifier un profil", { teachr })
+              }
+            >
+              <Text style={styles.textButton2}>Modifier ses informations</Text>
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>Ajouté le {teachr.teachrs.createdAt} </Text>
+            <Text style={{ textAlign: "center" }}>
+              Ajouté le {teachr.teachrs.createdAt}{" "}
+            </Text>
           </View>
         );
       })}
