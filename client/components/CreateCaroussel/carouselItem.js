@@ -9,17 +9,17 @@ import {
 } from "react-native";
 import styles from "../../styles/carousel";
 
-function CarouselItem({ item }) {
+function CarouselItem({ item, key }) {
   return (
     <SafeAreaView style={styles.item}>
       <Card style={styles.card}>
         <View style={styles.blockMargin}>
           <View style={styles.containerFlex}>
             <Image style={styles.img} source={{ uri: item.source }} />
-            <Text>{item.title}</Text>
+            <Text>{item.name}</Text>
           </View>
           <Text style={styles.titre}>Formation</Text>
-          <Text>{item.title}</Text>
+          <Text>{item.formation}</Text>
           <Text style={styles.titre}>Description</Text>
           <Text>{item.description}</Text>
           <TouchableOpacity style={styles.button}>

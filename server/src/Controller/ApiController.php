@@ -15,22 +15,16 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class ApiController extends AbstractController
 {
     
-    ////////////////////////////////////////////////////////METHODE GET POUR RECUPERER LES DONNÉES DES TEACHERS///////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////METHODE GET POUR RECUPERER LES DONNÉES DES TEACHRS///////////////////////////////////////////////////////////
     /**
      * @Route("/api/users", name="users", methods={"GET"})
      */
     public function getUsers(ProfilRepository $profilRepository)
     {
-        // $Teachr = $teachrsRepository->findAll();
-        // $postSerialise = $serializer->serialize($Teachr, 'json');
-        // $response = new Response();
-        // $response->setContent(json_encode($postSerialise));
-        // dd($Teachr);
-        // var_dump($response);
         return $this->json($profilRepository->findAll(), 200);
     }
 
-    ////////////////////////////////////////////////////////METHODE POST POUR ENVOYER LES DONNÉES DES TEACHERS///////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////METHODE POST POUR ENVOYER LES DONNÉES DES TEACHRS///////////////////////////////////////////////////////////
     /**
      * @Route("/api/users", name="users_create", methods={"POST"})
      */
@@ -56,7 +50,7 @@ class ApiController extends AbstractController
         }
     }
 
-
+    ////////////////////////////////////////////////////////METHODE PUT POUR MODIFIER LES DONNÉES DES TEACHRS///////////////////////////////////////////////////////////
     /**
      * @Route("/api/users/{id}", name="users_update", methods={"PUT"})
      */
